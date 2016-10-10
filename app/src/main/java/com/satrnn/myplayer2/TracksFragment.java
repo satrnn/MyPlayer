@@ -43,6 +43,7 @@ public class TracksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
         ListView listView = (ListView) rootView.findViewById(R.id.all_tracks);
 
         ArrayList<String> items = Test();
@@ -107,7 +108,6 @@ public class TracksFragment extends Fragment {
                     // contacts-related task you need to do.
                     Log.d("TAG", "dsds");
                 } else {
-
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }

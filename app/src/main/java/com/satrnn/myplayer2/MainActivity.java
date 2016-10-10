@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
             ListView listView = (ListView) rootView.findViewById(R.id.all_tracks);
 
             String[] items = {"AAA", "BBB"};
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getContext(), " ", Toast.LENGTH_SHORT).show();
                 }
             });
-
+            listView.setNestedScrollingEnabled(true);
             //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 
 
