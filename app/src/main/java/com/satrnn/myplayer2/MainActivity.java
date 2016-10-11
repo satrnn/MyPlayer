@@ -1,5 +1,6 @@
 package com.satrnn.myplayer2;
 
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,27 +25,30 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
+public class MainActivity extends AppCompatActivity
+        implements PlayerFragment.OnFragmentInteractionListener
+{
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (findViewById(R.id.player_fragment) != null) {
+
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            PlayerFragment player = PlayerFragment.newInstance();
+
+            player.setArguments(getIntent().getExtras());
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.player_fragment, player).commit();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -93,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onFragmentInteraction(Uri uri)
+    {
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -123,22 +131,6 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-            ListView listView = (ListView) rootView.findViewById(R.id.all_tracks);
-
-            String[] items = {"AAA", "BBB"};
-            ListAdapter listAdapter = new ArrayAdapter<String>(getContext(), R.layout.list_item, R.id.list_item_text, items);
-            listView.setAdapter(listAdapter);
-
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(getContext(), " ", Toast.LENGTH_SHORT).show();
-                }
-            });
-            listView.setNestedScrollingEnabled(true);
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-
-
             return rootView;
         }
     }
@@ -156,8 +148,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             if(position == 0)
             {
                 return TracksFragment.newInstance();

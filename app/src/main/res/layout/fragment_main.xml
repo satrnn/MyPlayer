@@ -1,16 +1,4 @@
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recyclerview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:fillViewport="true" >
-
-
-        <ListView
-            android:id="@+id/all_tracks"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            />
-</android.support.v4.widget.NestedScrollView>
+    android:layout_height="match_parent" />
